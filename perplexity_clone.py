@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from tavily import TavilyClient
-import groq
+from groq import Groq
 from dotenv import load_dotenv
 from langchain.memory import ConversationBufferMemory
 from langchain_core.prompts import ChatPromptTemplate
@@ -11,7 +11,7 @@ load_dotenv()
 
 # Initialize APIs
 tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
-client = groq.Client(api_key=os.getenv("GROQ_API_KEY"))
+groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 # Configure Streamlit page
 st.set_page_config(
@@ -129,7 +129,7 @@ def main():
             )
             
             # Generate response
-            response = client.chat.completions.create(
+            response = groq_client.chat.completions.create(
                 messages=[{"role": "user", "content": formatted_prompt}],
                 model="deepseek-r1-distill-llama-70b",
                 temperature=0.6,

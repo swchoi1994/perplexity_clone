@@ -25,8 +25,14 @@ st.set_page_config(
 # User database (For demo purposes - use proper database in production)
 VALID_USERS = {
     "swchoi1994": "password123!",
-    "user2": "securePass456@",
-    "user3": "llama3$789"
+    "minji": "password123!",
+    "user3": "llama3$789",
+    "admin": "admin123!",
+    "kracivaya": "hjk009339",
+    "honest": "28a35a36a",
+    "jshuang": "password123!",
+    "jsjoo": "password123!",
+    
 }
 
 # Custom CSS for dark mode
@@ -34,7 +40,7 @@ def set_dark_mode():
     st.markdown("""
     <style>
         .stApp {
-            background-color: #1a1a1a;
+            background-color: #010f33;
             color: #ffffff;
         }
         .stTextInput input, .stTextInput textarea {

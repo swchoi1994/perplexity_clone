@@ -5,4 +5,4 @@ groq==0.16.0
 langchain-core==0.2.1
 langchain-community==0.2.1
 requests==2.32.3
-deepseek-chat==0.1.10
+# deepseek-chat==0.1.10

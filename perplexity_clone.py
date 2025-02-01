@@ -133,7 +133,7 @@ def main():
                 messages=[{"role": "user", "content": formatted_prompt}],
                 model="deepseek-r1-distill-llama-70b",
                 temperature=0.6,
-                max_completion_tokens=4096,
+                max_completion_tokens=131072,
                 top_p=0.95
             )
             

@@ -90,6 +90,49 @@ def main():
             return_messages=True
         )
     
+    # Add sidebar for model selection
+    with st.sidebar:
+        st.title("Model Settings")
+        selected_model = st.selectbox(
+            "Choose Language Model",
+            options=[
+                "deepseek-r1-distill-llama-70b",
+                "gemma2-9b-it",
+                "llama-3.3-70b-versatile",
+                "llama-3.2-3b-preview",
+                "mixtral-8x7b-32768"
+            ],
+            index=0,
+            key="model_selector"
+        )
+        
+        # Model information and token limits
+        model_info = {
+            "deepseek-r1-distill-llama-70b": {
+                "description": "Optimized for general tasks, good balance of performance and speed",
+                "max_tokens": 131072
+            },
+            "gemma2-9b-it": {
+                "description": "Google's efficient and capable model",
+                "max_tokens": 8192
+            },
+            "llama-3.3-70b-versatile": {
+                "description": "Meta's versatile large language model",
+                "max_tokens": 32768
+            },
+            "llama-3.2-3b-preview": {
+                "description": "Lightweight and fast Meta model",
+                "max_tokens": 8192
+            },
+            "mixtral-8x7b-32768": {
+                "description": "Strong performance on complex reasoning tasks",
+                "max_tokens": 32768
+            }
+        }
+        
+        st.info(f"**Model Info:** {model_info[selected_model]['description']}\n\n"
+                f"**Max Tokens:** {model_info[selected_model]['max_tokens']}")
+    
     st.title(f"Welcome {st.session_state.current_user}")
     
     # Display chat history
@@ -134,12 +177,12 @@ def main():
                 search_results=search_result['answer']
             )
             
-            # Generate response
+            # Generate response with selected model and its specific token limit
             response = groq_client.chat.completions.create(
                 messages=[{"role": "user", "content": formatted_prompt}],
-                model="deepseek-r1-distill-llama-70b",
+                model=selected_model,
                 temperature=0.6,
-                max_completion_tokens=131072,
+                max_completion_tokens=model_info[selected_model]['max_tokens'],
                 top_p=0.95
             )
             
